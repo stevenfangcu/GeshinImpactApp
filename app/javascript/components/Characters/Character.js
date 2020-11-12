@@ -19,11 +19,13 @@ const CharLogo = styled.div`
     border-radius: 100%;
     border: 1px solid #efefef;
   }`
-  
-const CharName = styled.div`
-  padding: 20px 0 10px 0;`
 
-const LinkWrapper = styled.div`
+const CharName = styled.div`
+  padding: 20px 0 10px 0;
+  `
+
+const LinkWrapper = styled.div
+`
   margin: 30px 0 20px 0;
   height: 50px;
 

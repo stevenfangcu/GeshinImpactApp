@@ -4,7 +4,7 @@ module Api
       protect_from_forgery with: :null_session
 
       def create
-        guide = Guide.new(guide_params)
+        guide = character.guides.new(guide_params)
 
         if guide.save
           render json: GuideSerializer.new(guide).serialized_json
@@ -24,6 +24,10 @@ module Api
       end
 
       private
+
+      def character
+        @character ||= Character.find(params[:character_id])
+      end
       def guide_params
         params.require(:guide).permit(:title, :description, :character_id)
       end
