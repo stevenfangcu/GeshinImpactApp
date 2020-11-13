@@ -63,28 +63,34 @@ const Character = (props) =>{
     const character_id = character.data.id
     console.log(JSON.stringify({guide}))
 
+    /*
     axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken
-    
+
     axios.post('/api/v1/guides',{guide, character_id})
     .then(resp => {
       debugger
     })
     .catch(resp =>{})
+    */
 
-
-    /*
-    fetch('api/v1/guides',{
+    guide.character_id = character_id
+    fetch('/api/v1/guides',{
       method: 'POST',
       headers: {
         'X-CSRF-Token': csrfToken,
         'Accept': 'application/json',
         'Content-Type': 'application/json'},
-      body: JSON.stringify(guide, character_id)
+      body: JSON.stringify(guide)
     })
     .then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => {
+      console.log(data)
+      const included = [...character.included, data.data.data]
+      setCharacter({...character, included})
+      setGuide({title: '', description: '',})
+    })
     .catch(error => console.log(error));
-    */
+
   }
 
   return (
