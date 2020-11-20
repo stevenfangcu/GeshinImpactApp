@@ -8,13 +8,14 @@
 
 characters = Character.create([
   { name: 'Klee',
-  image_url: "google.ca"
+  image_url: "https://gamespot1.cbsistatic.com/uploads/scale_landscape/1552/15524586/3751356-genshin-impact-mihoyo-open-world-rpg-role-playing-ps4-nintendo-switch-pc-ios-android-new-update-klee-gacha-banner-wishes-primogems.jpg"
   }
   ])
 guides = Guide.create([
   {
     title: "Klee's optimal build",
     description: "uhh idk",
-    character: characters.first
+    character: characters.first,
+    score: "S"
   }
   ])

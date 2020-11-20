@@ -87,10 +87,16 @@ const Character = (props) =>{
       console.log(data)
       const included = [...character.included, data.data.data]
       setCharacter({...character, included})
-      setGuide({title: '', description: '',})
+      setGuide({title: '', description: '',score: '',})
     })
     .catch(error => console.log(error));
 
+  }
+
+  const setRating = (score, e) => {
+    e.preventDefault()
+
+    setGuide({...guide, score})
   }
 
   return (
@@ -110,6 +116,7 @@ const Character = (props) =>{
           <GuidesForm
             handleChange={handleChange}
             handleSubmit={handleSubmit}
+            setRating={setRating}
             attributes={character.data.attributes}
             guide={guide}
           />

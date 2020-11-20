@@ -10,10 +10,10 @@ const GuidesForm = (props) => {
   border-radius: 4px;
   font-size: 18px;
   padding: 45px 0 15px 0;
-  background: #fff;
+  background: #000000;
   `
   const RatingBox = styled.div`
-    background: #fff;
+    background: #000000;
     display: flex;
     justify-content: center;
     flex-direction: row-reverse;
@@ -32,7 +32,7 @@ const GuidesForm = (props) => {
       vertical-align: top;
     }`
     const RatingLabel = styled.div`
-      background: #fff;
+      background: #000000;
       display: flex;
       justify-content: center;
       flex-direction: row-reverse;
@@ -53,7 +53,7 @@ const GuidesForm = (props) => {
     return(
       <Fragment>
         <label></label>
-        <input type="radio" value={score} name="Rating" onChange={()=>console.log('selected',score)} id={`rating-${score}`}></input>
+        <input type="radio" value={score} name="Rating" onClick={props.setRating.bind(this, score)} onChange={()=>console.log('selected',score)} id={`rating-${score}`}></input>
       </Fragment>
     )
   })
@@ -65,8 +65,9 @@ const GuidesForm = (props) => {
       </Fragment>
     )
   })
+
   return (
-    <div className="Wrapper">
+    <div className="Wrapper" style={{ color: 'white' }}>
     <form onSubmit={props.handleSubmit}>
       <div>Have a guide for {props.attributes.name}? Share your Guide :)</div>
 
@@ -82,6 +83,7 @@ const GuidesForm = (props) => {
         <RatingContainer>
           <div className="rating-text">
             Rate this character
+            <br></br>
           </div>
           <RatingLabel>
             {ratingLabels}

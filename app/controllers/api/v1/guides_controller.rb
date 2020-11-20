@@ -29,7 +29,7 @@ module Api
         @character ||= Character.find(params[:character_id])
       end
       def guide_params
-        params.require(:guide).permit(:title, :description, :character_id)
+        params.require(:guide).permit(:title, :description, :character_id, :score)
       end
     end
   end
