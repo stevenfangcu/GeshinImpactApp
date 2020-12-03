@@ -53,11 +53,11 @@ const GuidesForm = (props) => {
     return(
       <Fragment>
         <label></label>
-        <input type="radio" value={score} name="Rating" onClick={props.setRating.bind(this, score)} onChange={()=>console.log('selected',score)} id={`rating-${score}`}></input>
+        <input type="radio" value={score} name="Rating" onClick={props.setRating.bind(this,score)} onChange={()=>console.log('selected',score,this)} id={`rating-${score}`}></input>
       </Fragment>
     )
   })
-
+//{()=>{ {props.setRating.bind(this,score)}; console.log(props.setRating.bind(this,score))}}
   const ratingLabels = rating.map( (score, index) => {
     return(
       <Fragment>
