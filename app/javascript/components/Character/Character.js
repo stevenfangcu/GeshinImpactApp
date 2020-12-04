@@ -92,7 +92,6 @@ const Character = (props) =>{
     .catch(error => console.log(error));
 
   }
-
   const setRating = (score, e) => {
     e.preventDefault()
     console.log(score);

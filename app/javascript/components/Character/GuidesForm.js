@@ -1,9 +1,12 @@
 import React, {Fragment} from 'react'
 import styled from 'styled-components'
+import Hover from './Stars/Hover'
+import Selected from './Stars/Selected'
+import Gray from './Stars/Gray'
 
 
 const GuidesForm = (props) => {
-  const rating = ['S','A','B','C','D','F'];
+  const rating = [5,4,3,2,1];
 
   const RatingContainer = styled.div`
   text-align: center;
@@ -19,53 +22,44 @@ const GuidesForm = (props) => {
     flex-direction: row-reverse;
     position: relative;
 
-    label{
-      vertical-align: top;
-      width: 20px;
-    }
     input{
+      display:none;
+    }
+
+    label{
       cursor: pointer;
-      width: 51px;
-      height: 20px;
-      display: in-block;
-      text-align:center;
-      vertical-align: top;
+      width: 40px;
+      height: 40px;
+      background-image: url("data:image/svg+xml;charset=UTF-8,${Gray}");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 70%;
+
+    }
+    input:checked ~ label,
+    input:checked ~ label ~ label {
+      background-image: url("data:image/svg+xml;charset=UTF-8,${Selected}");
+    }
+
+    input:not(:checked) ~ label:hover,
+    input:not(:checked) ~ label:hover ~ label{
+      background-image: url("data:image/svg+xml;charset=UTF-8,${Hover}");
     }`
     const RatingLabel = styled.div`
-      background: #000000;
-      display: flex;
-      justify-content: center;
-      flex-direction: row-reverse;
-      position: relative;
-
-      label, input{
-        cursor: pointer;
-        width: 120px;
-        height: 20px;
-        display: in-block;
-        text-align:left;
-        vertical-align: top;
-        margin-left: 6px;
-      }`
+`
   const RatingTitle = styled.div``
 
   const ratingOptions = rating.map( (score, index) => {
     return(
       <Fragment>
+        <input type="radio" value={score} name="Rating" onClick={()=>bindSelected(this,score)} onChange={()=>console.log("selected",score)} id={`rating-${score}`}></input>
         <label></label>
-        <input type="radio" value={score} name="Rating" onClick={props.setRating.bind(this,score)} onChange={()=>console.log('selected',score,this)} id={`rating-${score}`}></input>
       </Fragment>
     )
   })
-//{()=>{ {props.setRating.bind(this,score)}; console.log(props.setRating.bind(this,score))}}
-  const ratingLabels = rating.map( (score, index) => {
-    return(
-      <Fragment>
-        <label>{score}</label>
-      </Fragment>
-    )
-  })
-
+  function bindSelected(this1,score) {
+    props.setRating(score,this);
+  }
   return (
     <div className="Wrapper" style={{ color: 'white' }}>
     <form onSubmit={props.handleSubmit}>
@@ -85,9 +79,6 @@ const GuidesForm = (props) => {
             Rate this character
             <br></br>
           </div>
-          <RatingLabel>
-            {ratingLabels}
-          </RatingLabel>
           <RatingBox>
             {ratingOptions}
           </RatingBox>
