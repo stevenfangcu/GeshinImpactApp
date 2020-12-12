@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Hover from './Stars/Hover'
 import Selected from './Stars/Selected'
 import Gray from './Stars/Gray'
+import './Guides.css'
 
 
 const GuidesForm = (props) => {
@@ -15,6 +16,7 @@ const GuidesForm = (props) => {
   padding: 45px 0 15px 0;
   background: #000000;
   `
+
   const RatingBox = styled.div`
     background: #000000;
     display: flex;
@@ -52,25 +54,23 @@ const GuidesForm = (props) => {
   const ratingOptions = rating.map( (score, index) => {
     return(
       <Fragment>
-        <input type="radio" value={score} name="Rating" onClick={()=>bindSelected(this,score)} onChange={()=>console.log("selected",score)} id={`rating-${score}`}></input>
-        <label></label>
+        <input type="radio" value={score} name="Rating" checked={props.guide.score == score} onChange={()=>console.log("selected",score)} id={`rating-${score}`}></input>
+        <label onClick={props.setRating.bind(this,score)}></label>
       </Fragment>
     )
   })
-  function bindSelected(this1,score) {
-    props.setRating(score,this);
-  }
+
   return (
     <div className="Wrapper" style={{ color: 'white' }}>
     <form onSubmit={props.handleSubmit}>
       <div>Have a guide for {props.attributes.name}? Share your Guide :)</div>
 
-      <div className="field">
-        <input onChange={props.handleChange} value={props.guide.title} type="text" name="title" placeholder="guide name"/>
+      <div>
+        <input className="inputText" onChange={props.handleChange} value={props.guide.title} type="text" name="title" placeholder="guide name"/>
       </div>
 
       <div className="field">
-        <input type="text" onChange={props.handleChange} value={props.guide.description} name="description" placeholder="guide description"/>
+        <input className="inputText" onChange={props.handleChange} value={props.guide.description} name="description" placeholder="guide description"/>
       </div>
 
       <div className="field">

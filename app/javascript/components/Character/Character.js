@@ -94,7 +94,7 @@ const Character = (props) =>{
   }
   const setRating = (score, e) => {
     e.preventDefault()
-    console.log(score);
+    
     setGuide({...guide, score})
   }
 

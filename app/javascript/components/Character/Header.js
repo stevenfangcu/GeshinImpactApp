@@ -20,13 +20,26 @@ const TotalGuides = styled.div`
 const Header = (props) => {
   const {name, image_url} = props.attributes
   const total = props.guides.length
-
+  var score = 0;
+  console.log(props.guides[0].attributes.score);
+  for(var i = 0; i < total; i++){
+    console.log(props.guides[i]);
+    if(props.guides[i].attributes.score == null){
+      score += 0;
+    }else if(props.guides[i].attributes.score == undefined){
+      score += 0;
+    }else{
+      score += parseFloat(props.guides[i].attributes.score);
+    }
+  }
+  const userRating = (score / total).toFixed(2);
   return (
     <Wrapper>
       <h1>
         <img src={image_url} alt={name}/> {name} </h1>
         <div>
           <TotalGuides>{total} User Guides</TotalGuides>
+          <TotalGuides>{userRating} rating </TotalGuides>
         </div>
     </Wrapper>
   )
