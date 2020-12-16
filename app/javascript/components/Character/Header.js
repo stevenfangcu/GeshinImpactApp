@@ -23,7 +23,6 @@ const Header = (props) => {
   var score = 0;
   console.log(props.guides[0].attributes.score);
   for(var i = 0; i < total; i++){
-    console.log(props.guides[i]);
     if(props.guides[i].attributes.score == null){
       score += 0;
     }else if(props.guides[i].attributes.score == undefined){

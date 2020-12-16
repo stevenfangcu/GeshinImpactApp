@@ -2,6 +2,7 @@ import React, {useState, useEffect, Fragment} from 'react'
 import Header from './Header'
 import styled from 'styled-components'
 import GuidesForm from './GuidesForm'
+import Guide from './Guide'
 import axios from 'axios'
 
 const Wrapper = styled.div`
@@ -86,6 +87,7 @@ const Character = (props) =>{
     .then(data => {
       console.log(data)
       const included = [...character.included, data.data.data]
+      console.log(included)
       setCharacter({...character, included})
       setGuide({title: '', description: '',score: '',})
     })
@@ -94,10 +96,21 @@ const Character = (props) =>{
   }
   const setRating = (score, e) => {
     e.preventDefault()
-    
+
     setGuide({...guide, score})
   }
-
+  let guides
+  if (loaded && character.included){
+    guides = character.included.map( (item,index) => {
+      console.log('mapping',item)
+      return(
+        <Guide
+          key={index}
+          attributes={item.attributes}
+          />
+      )
+    })
+  }
   return (
     <Wrapper>
       {loaded &&
@@ -108,7 +121,7 @@ const Character = (props) =>{
                 attributes={character.data.attributes}
                 guides={character.included}
               />
-            <div className="guides"></div>
+            {guides}
           </Main>
         </Column>
         <Column>
