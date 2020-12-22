@@ -29,18 +29,13 @@ const Card = styled.div`
     <div> {subStars} </div>
   )
 */
-const spawnStars = ((score1) => {
-  console.log(score1);
-  var counter = 0;
-  var starFragment = document.createDocumentFragment();
-  var starDiv = document.createElement('div');
-  for(var i = 0; i < score1; i++){
-    if(counter < score){
-      counter++;
-      starFragment.appendChild();
-    }
-  }
-
+const spawnStars = starArray.map( (score, index) => {
+  return(
+    <Fragment>
+      <input type="radio"></input>
+      <label></label>
+    </Fragment>
+  )
 })
 
 const Guide = (props) => {
@@ -50,7 +45,7 @@ const Guide = (props) => {
       <div className="Rating">
         <div className="score">
           {score}
-          {spawnStars({score})}
+          {spawnStars}
         </div>
       </div>
       <div className="title">{title}</div>
