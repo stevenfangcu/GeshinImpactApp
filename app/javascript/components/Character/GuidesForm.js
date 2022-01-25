@@ -4,10 +4,13 @@ import Hover from './Stars/Hover'
 import Selected from './Stars/Selected'
 import Gray from './Stars/Gray'
 import './Guides.css'
+import { Container, Button, Alert } from 'react-bootstrap';
+import { CSSTransition } from 'react-transition-group';
 
 
 const GuidesForm = (props) => {
   const rating = [5,4,3,2,1];
+
 
   const RatingContainer = styled.div`
   text-align: center;
@@ -66,7 +69,7 @@ const GuidesForm = (props) => {
       <div>Have a guide for {props.attributes.name}? Share your Guide :)</div>
 
       <div>
-        <input className="inputText" onChange={props.handleChange} value={props.guide.title} type="text" name="title" placeholder="guide name"/>
+        <input className="inputText" onChange={props.handleChange} value={props.guide.title} type="text" name="title" placeholder="guide name" />
       </div>
 
       <div className="field">
@@ -87,7 +90,7 @@ const GuidesForm = (props) => {
       </div>
 
 
-    <button type="sumbit">Submit</button>
+    <button className="centerButton" type="sumbit">Submit Review</button>
 
     </form>
     </div>

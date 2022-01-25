@@ -61,7 +61,6 @@ const RatingBox = styled.div`
 */
 const spawnStars = starArray.map( (score, index) => {
   selectedCounter++;
-  console.log("testing: " + selectedCounter);
 
   return(
     <Fragment>
@@ -81,7 +80,6 @@ const subStars =  starArray.map((score, index) => {
 })
 
 const grayStars = (score) => {
-  console.log(score);
   var grayArray = [];
   for(var i = 0; i < score; i++){
     grayArray.push(".");
@@ -99,7 +97,7 @@ const grayStars = (score) => {
 const Guide = (props) => {
   const {score, title, description} = props.attributes
   return (
-    <Card>
+    <Card key={props.attributes.description}>
       <div className="Rating">
         <RatingBox>
           {grayStars(score)}
@@ -107,7 +105,7 @@ const Guide = (props) => {
         {score}
       </div>
       <div className="title">{title}</div>
-
+      <div className="description">{description}</div>
     </Card>
   )
 }

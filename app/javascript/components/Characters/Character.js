@@ -39,10 +39,10 @@ const LinkWrapper = styled.div
     text-decoration: none;
   }
 `
-
+// main page - character population
 const Character = (props) => {
   return (
-    <Char>
+    <Char key={props.attributes.name}>
       <CharLogo>
         <img src={props.attributes.image_url} alt={props.attributes.name}/>
       </CharLogo>

@@ -1,0 +1,15 @@
+current directory: /Users/stevenfang/Desktop/geshin-impact-app/vendor/cache/ruby/3.0.0/gems/bindex-0.8.1/ext/skiptrace
+/usr/local/opt/ruby/bin/ruby -I /usr/local/Cellar/ruby/3.0.3/lib/ruby/3.0.0 -r ./siteconf20211202-53389-zj6ljb.rb extconf.rb
+creating Makefile
+
+current directory: /Users/stevenfang/Desktop/geshin-impact-app/vendor/cache/ruby/3.0.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= clean
+
+current directory: /Users/stevenfang/Desktop/geshin-impact-app/vendor/cache/ruby/3.0.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\=
+compiling cruby.c
+linking shared-object skiptrace/internal/cruby.bundle
+
+current directory: /Users/stevenfang/Desktop/geshin-impact-app/vendor/cache/ruby/3.0.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= install
+/usr/bin/install -c -m 0755 cruby.bundle ./.gem.20211202-53389-2hh9ar/skiptrace/internal
