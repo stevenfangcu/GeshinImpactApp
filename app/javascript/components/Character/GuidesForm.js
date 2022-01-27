@@ -6,6 +6,7 @@ import Gray from './Stars/Gray'
 import './Guides.css'
 import { Container, Button, Alert } from 'react-bootstrap';
 import { CSSTransition } from 'react-transition-group';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const GuidesForm = (props) => {
@@ -50,9 +51,25 @@ const GuidesForm = (props) => {
     input:not(:checked) ~ label:hover ~ label{
       background-image: url("data:image/svg+xml;charset=UTF-8,${Hover}");
     }`
-    const RatingLabel = styled.div`
-`
+    
+    const RatingLabel = styled.div``
   const RatingTitle = styled.div``
+
+  const ButtonContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  `
+
+  const Button = styled.button`
+    background: ${props => props.primary ? "palevioletred" : "white"};
+    color: ${props => props.primary ? "white" : "palevioletred"};
+    font-size: 1em;
+    margin: 1em;
+    padding: 0.25em 1em;
+    border: 2px solid palevioletred;
+    border-radius: 3px;
+  `
 
   const ratingOptions = rating.map( (score, index) => {
     return(
@@ -88,9 +105,9 @@ const GuidesForm = (props) => {
 
         </RatingContainer>
       </div>
-
-
-    <button className="centerButton" type="sumbit">Submit Review</button>
+    <ButtonContainer>
+     <Button>Submit Guide</Button>
+    </ButtonContainer>
 
     </form>
     </div>

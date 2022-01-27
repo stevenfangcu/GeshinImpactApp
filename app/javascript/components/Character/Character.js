@@ -1,11 +1,11 @@
 import React, {useState, useEffect, Fragment} from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './Header'
 import styled from 'styled-components'
 import GuidesForm from './GuidesForm'
 import Guide from './Guide'
-import axios from 'axios'
-import { Modal } from 'react-bootstrap'
-import ModalHeader from 'react-bootstrap/esm/ModalHeader'
+import { Alert, Modal } from 'react-bootstrap'
+import { Toast } from 'react-bootstrap'
 
 const Wrapper = styled.div`
   margin-left: auto;
@@ -39,11 +39,43 @@ const ModalContainer = styled.div`
   justify-content: center;
 `
 
+const ModalContainerTopCenter = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0; 
+  width: 100vw;
+  heigh: 15vh;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+`   
+
+const ModalContainerBottomRight = styled.div`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 25vw;
+  height: 10vh;
+  align-items: flex-end;
+`
+
+const ErrorParagraph = styled.p`
+  text-align: center;
+  width: 20vw;
+  height: 10vh;
+  background: white;
+  p{
+    
+  }
+`
+
 const Character = (props) =>{
   const [character, setCharacter] = useState({})
   const [guide, setGuide] = useState({})
   const [loaded, setLoaded] = useState(false)
   const [errorMessage, setErrorMessage] = useState({message: "", state: false})
+  const [errorPopupMessage, setErrorPopupMessage] = useState({message: "", state: false})
+  const [errorToastMessage, setErrorToastMessage] = useState({message: "", state: false})
 
   useEffect(()=>{
     const slug = props.match.params.slug
@@ -76,21 +108,45 @@ const Character = (props) =>{
         <div>
           {errorMessage.state ? (
             <ModalContainer>
-              <button onClick={() => setErrorMessage({state: false})}>Close</button>
+              <ErrorParagraph>
+                {errorMessage.message}
+                <br></br>
+                <button onClick={() => setErrorMessage({state: false})}>Close</button>
+              </ErrorParagraph>
             </ModalContainer>
           ): null}
         </div>
-        // <ModalContainer>
-        //   <Modal 
-        //   show={errorMessage.state}
-        //   centered
-        //   >
-        //     <p>
-        //       {errorMessage.message}
-        //     </p>
-        //     <button onClick={() => closeErrorModal()}>Close</button>
-        //   </Modal>
-        // </ModalContainer>
+      )
+    }
+    if(errorPopupMessage.state){
+      return (
+        <div>
+          <ModalContainerTopCenter>
+            {errorPopupMessage.state ? (
+            <Alert variant='danger' transition onClose={() => setErrorPopupMessage({state:false})} dismissible>
+              <Alert.Heading>Oh Snap! You got an Error!</Alert.Heading>
+              <p>{errorPopupMessage.message}</p>
+            </Alert>
+            ): null}
+          </ModalContainerTopCenter>
+        </div>
+      )
+    }
+    if(errorToastMessage.state){
+      return(
+      <div>
+        <ModalContainerBottomRight>
+          {errorToastMessage.state ? (
+            <Toast onClose={() => setErrorToastMessage({state:false})} animation={true} position='top-center' delay={30000000} autohide>
+              <Toast.Header>
+                <Toast.Body>
+                  {errorToastMessage.message}
+                </Toast.Body>
+              </Toast.Header>
+            </Toast>
+          ): null}
+          </ModalContainerBottomRight>
+      </div>
       )
     }
   }
@@ -121,11 +177,12 @@ const Character = (props) =>{
         console.log(errorMessage)
       }else if(!guide.description || String(guide.description).length < 5){
         // setErrorMessage('Description is too short (min 5 chars)')
-        setErrorMessage(Object.assign({}, errorMessage, {message: "Description is too short", state: true}))
-        console.log(errorMessage)
+        setErrorPopupMessage(Object.assign({}, errorPopupMessage, {message: "Description is too short", state: true}))
+        console.log(errorPopupMessage)
       }else if(!guide.score){
-        setErrorMessage(Object.assign({}, errorMessage, {message: "Score is not selected", state: true}))
-        console.log(errorMessage)
+        setErrorToastMessage(Object.assign({}, errorToastMessage, {message: "Score is not selected", state: true}))
+        console.log("Score error")
+        console.log(errorToastMessage)
       }else{
       /*
         fetching the api data from the database
@@ -183,25 +240,25 @@ const Character = (props) =>{
     <Wrapper>
       {loaded &&
         <Fragment>
-        <Column>
-          <Main>
-              <Header
-                attributes={character.data.attributes}
-                guides={character.included}
-              />
-            {guides}
-          </Main>
-        </Column>
-        <ColumnGuides>
-          <GuidesForm
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-            setRating={setRating}
-            attributes={character.data.attributes}
-            guide={guide}
-          />
-        </ColumnGuides>
-        {renderErrorModal()}
+          <Column>
+            <Main>
+                <Header
+                  attributes={character.data.attributes}
+                  guides={character.included}
+                />
+              {guides}
+            </Main>
+          </Column>
+          <ColumnGuides>
+            <GuidesForm
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+              setRating={setRating}
+              attributes={character.data.attributes}
+              guide={guide}
+            />
+          </ColumnGuides>
+          {renderErrorModal()}
         </Fragment>
       }
     </Wrapper>)
