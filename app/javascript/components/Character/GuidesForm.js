@@ -12,7 +12,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const GuidesForm = (props) => {
   const rating = [5,4,3,2,1];
 
-
   const RatingContainer = styled.div`
   text-align: center;
   border-radius: 4px;
@@ -90,7 +89,7 @@ const GuidesForm = (props) => {
       </div>
 
       <div className="field">
-        <input className="inputText" onChange={props.handleChange} value={props.guide.description} name="description" placeholder="guide description"/>
+        <textarea className="inputTextPara" onChange={props.handleChange} value={props.guide.description} name="description" placeholder="guide description"/>
       </div>
 
       <div className="field">

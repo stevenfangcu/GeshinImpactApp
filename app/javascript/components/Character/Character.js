@@ -4,8 +4,8 @@ import Header from './Header'
 import styled from 'styled-components'
 import GuidesForm from './GuidesForm'
 import Guide from './Guide'
-import { Alert, Modal } from 'react-bootstrap'
-import { Toast } from 'react-bootstrap'
+import { Alert, Modal, ToastHeader } from 'react-bootstrap'
+import { Toast,ToastBody } from 'react-bootstrap'
 
 const Wrapper = styled.div`
   margin-left: auto;
@@ -52,20 +52,27 @@ const ModalContainerTopCenter = styled.div`
 
 const ModalContainerBottomRight = styled.div`
   position: absolute;
-  bottom: 0;
+  bottom: 14%;
   right: 0;
-  width: 25vw;
-  height: 10vh;
+  width: 20vw;
+  height: 1vh;
   align-items: flex-end;
 `
 
 const ErrorParagraph = styled.p`
   text-align: center;
-  width: 20vw;
-  height: 10vh;
+  width: 20%;
+  height: 15%;
   background: white;
-  p{
-    
+  button{
+    background-color: #e7e7e7;
+    color: black;
+    border-radius: 12px;
+    border: 2px solid #555555;
+  }
+  button:hover{
+    background-color: #4CAF50;
+    color: white;
   }
 `
 
@@ -103,6 +110,7 @@ const Character = (props) =>{
   }
 
   const renderErrorModal = () =>{
+    //Custom popup alert
     if (errorMessage.state){
       return (
         <div>
@@ -118,6 +126,7 @@ const Character = (props) =>{
         </div>
       )
     }
+    //react Alert component - bootstrap
     if(errorPopupMessage.state){
       return (
         <div>
@@ -132,17 +141,23 @@ const Character = (props) =>{
         </div>
       )
     }
+    //react Toast component - bootstrap 
     if(errorToastMessage.state){
       return(
       <div>
         <ModalContainerBottomRight>
           {errorToastMessage.state ? (
-            <Toast onClose={() => setErrorToastMessage({state:false})} animation={true} position='top-center' delay={30000000} autohide>
-              <Toast.Header>
-                <Toast.Body>
+            <Toast bg='danger' onClose={() => setErrorToastMessage({state:false})} animation={true} position='top-center' delay={30000000} autohide>
+              <ToastHeader>
+                <strong>
+                Error! 
+                </strong>
+              </ToastHeader>
+              <ToastBody>
+                <p>
                   {errorToastMessage.message}
-                </Toast.Body>
-              </Toast.Header>
+                </p>
+              </ToastBody>
             </Toast>
           ): null}
           </ModalContainerBottomRight>

@@ -6,4 +6,16 @@
   margin: 12px 0;
   padding: 12px;
 }
+.inputTextPara{
+  width: 93%;
+  min-height: 250px;
+  border-radius: 4px;
+  border: 1px solid #ada6a6;
+  margin: 12px 0;
+  padding: 12px;
+  text-align: left;
+}
 
+.toast-header .btn-close{
+  margin-left: auto;
+}
