@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import Selected from './Stars/Selected'
 import Gray from './Stars/Gray'
 import Hover from './Stars/Hover'
+import Star from '/public/images/star.png'
+import GoldStar from '/public/images/gold-star.png'
 
 
 const starArray = [1,2,3,4,5];
@@ -19,6 +21,13 @@ const Card = styled.div`
   .notSelected{
     background-image: url("data:image/svg+xml;charset=UTF-8,${Gray}");
   }
+  .Rating{
+    font-size:2rem;
+  }
+  .title{
+    font-weight: bold;
+  }
+
 `
 const RatingBox = styled.div`
   display: flex;
@@ -79,11 +88,28 @@ const subStars =  starArray.map((score, index) => {
   )
 })
 
+const spawnyellowstars = (data,title) =>{
+  console.log(data.score);
+  let stars = []
+  for(var i = 0; i < data.score; i++){
+    stars.push(<img key={title+i} src={GoldStar} height={20} width={20}></img>);
+  }
+  for(var j = 0; j < (5-(data.score)); j++){
+    stars.push(<img key={title+'non'+j} src={Star} height={20} width={20}></img>)
+  }
+  console.log(stars);
+  return (
+    <span>
+      {stars}
+    </span>)
+}
+
 const grayStars = (score) => {
   var grayArray = [];
   for(var i = 0; i < score; i++){
     grayArray.push(".");
   }
+
   const spawnStars = grayArray.map((score, index) => {
     return(
       <Fragment>
@@ -98,13 +124,13 @@ const Guide = (props) => {
   const {score, title, description} = props.attributes
   return (
     <Card key={props.attributes.description}>
-      <div className="Rating">
+      <div className="rating">
         <RatingBox>
-          {grayStars(score)}
+          {grayStars({score})}
         </RatingBox>
-        {score}
+        {spawnyellowstars({score},{title})}
       </div>
-      <div className="title">{title}</div>
+      <div className="title">Guide title: {title}</div>
       <div className="description">{description}</div>
     </Card>
   )

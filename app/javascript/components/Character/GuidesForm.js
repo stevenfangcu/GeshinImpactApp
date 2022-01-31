@@ -71,8 +71,10 @@ const GuidesForm = (props) => {
   `
 
   const ratingOptions = rating.map( (score, index) => {
+    console.log(score)
+    console.log(index)
     return(
-      <Fragment>
+      <Fragment key={score}>
         <input type="radio" value={score} name="Rating" checked={props.guide.score == score} onChange={()=>console.log("selected",score)} id={`rating-${score}`}></input>
         <label onClick={props.setRating.bind(this,score)}></label>
       </Fragment>
